@@ -9,8 +9,7 @@
     "check": "biome check . --write",
     "remotion": "remotionb studio",
     "render": "remotionb render",
-    "deploy": "node deploy.mjs",
-    "prepare": "panda codegen"
+    "deploy": "node deploy.mjs"
   },
   "dependencies": {
     "@remotion/bundler": "4.0.221",
@@ -28,9 +27,9 @@
   },
   "devDependencies": {
     "@biomejs/biome": "^1.9.3",
-    "@pandacss/dev": "0.46.1",
     "@remotion/eslint-config": "4.0.221",
     "@remotion/eslint-plugin": "4.0.221",
+    "@remotion/tailwind": "4.0.221",
     "@types/node": "20.14.11",
     "@types/react": "18.3.1",
     "@types/react-dom": "18.3.0",
@@ -40,5 +39,6 @@
     "eslint-config-next": "14.2.13",
     "prettier": "3.3.3",
     "typescript": "5.6.2"
-  }
+  },
+  "sideEffects": ["*.css"]
 }

@@ -1,3 +1,4 @@
+import '@/style.css'
 import { Main } from '@/remotion/MyComp/Main.tsx'
 import { NextLogo } from '@/remotion/MyComp/NextLogo.tsx'
 import {

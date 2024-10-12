@@ -46,9 +46,9 @@ const Home: NextPage = () => {
   }, [text])
 
   return (
-    <div>
+    <div className={'bg-red-900'}>
       <div style={container}>
-        <div className="cinematics" style={outer}>
+        <div className="bg-red-50" style={outer}>
           <Player
             component={Main}
             inputProps={inputProps}
