@@ -3,10 +3,10 @@ import type React from 'react'
 import { useMemo } from 'react'
 import { AbsoluteFill, Sequence, spring, useCurrentFrame, useVideoConfig } from 'remotion'
 import type { z } from 'zod'
-import type { CompositionProps } from '../../types/constants'
-import { NextLogo } from './NextLogo'
-import { Rings } from './Rings'
-import { TextFade } from './TextFade'
+import type { CompositionProps } from '../../types/constants.ts'
+import { NextLogo } from './NextLogo.tsx'
+import { Rings } from './Rings.tsx'
+import { TextFade } from './TextFade.tsx'
 
 loadFont()
 
@@ -43,9 +43,9 @@ export const Main = ({ title }: z.infer<typeof CompositionProps>) => {
   return (
     <AbsoluteFill style={container}>
       <Sequence durationInFrames={transitionStart + transitionDuration}>
-        <Rings outProgress={logoOut}></Rings>
+        <Rings outProgress={logoOut} />
         <AbsoluteFill style={logo}>
-          <NextLogo outProgress={logoOut}></NextLogo>
+          <NextLogo outProgress={logoOut} />
         </AbsoluteFill>
       </Sequence>
       <Sequence from={transitionStart + transitionDuration / 2}>

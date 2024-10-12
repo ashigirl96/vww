@@ -7,11 +7,26 @@
     "include": ["./*.js", "./*.mjs", "./*.ts", "./*.tsx", "./*.json"],
     "ignore": ["**/.next/**", "node_modules", "./app/docs/.next/**", ".next/**"]
   },
+  "formatter": {
+    "enabled": true,
+    "formatWithErrors": false,
+    "ignore": ["**/.next/**", "node_modules", "./app/docs/.next/**", ".next/**"],
+    "indentStyle": "space",
+    "indentWidth": 2,
+    "lineWidth": 100
+  },
   "linter": {
     "enabled": true,
-    "ignore": [".next/**", "node_modules", "./app/docs/.next/**", ".next/**"],
     "rules": {
-      "all": true,
+      "recommended": true,
+      "nursery": {
+        "useSortedClasses": "warn"
+      },
+      "correctness": {
+        "noUnusedImports": "warn",
+        "noUnusedVariables": "warn",
+        "noNodejsModules": "off"
+      },
       "suspicious": {
         "noExplicitAny": "off",
         "noConsoleLog": "off"
@@ -21,37 +36,31 @@
         "noDefaultExport": "off",
         "useFilenamingConvention": "off"
       },
-      //      "nursery": {
-      //        "noUndeclaredDependencies": "off"
-      //      },
       "complexity": {
         "useSimplifiedLogicExpression": "off",
         "noExcessiveCognitiveComplexity": "off",
         "noVoid": "off"
-      },
-      "correctness": {
-        "noNodejsModules": "off"
       }
-    }
-  },
-  "formatter": {
-    "enabled": true,
-    "formatWithErrors": false,
-    "ignore": ["**/.next/**", "node_modules", "./app/docs/.next/**", ".next/**"],
-    "indentStyle": "space",
-    "indentWidth": 2,
-    "lineWidth": 100
-  },
-  "json": {
-    "parser": {
-      "allowComments": true
     },
+    "ignore": [".next/**", "node_modules", "./app/docs/.next/**", ".next/**"]
+  },
+  "css": {
     "formatter": {
       "enabled": true,
       "indentStyle": "space",
-      "indentWidth": 2,
-      "lineWidth": 100
+      "indentWidth": 2
+    },
+    "linter": {
+      "enabled": true
+    },
+    "parser": {
+      "cssModules": true
     }
+  },
+  "vcs": {
+    "enabled": true,
+    "clientKind": "git",
+    "useIgnoreFile": true
   },
   "javascript": {
     "globals": ["React"],

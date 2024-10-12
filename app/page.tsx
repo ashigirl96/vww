@@ -5,10 +5,10 @@ import type { NextPage } from 'next'
 import type React from 'react'
 import { useMemo, useState } from 'react'
 import type { z } from 'zod'
-import { RenderControls } from '../components/RenderControls'
-import { Spacing } from '../components/Spacing'
-import { Tips } from '../components/Tips/Tips'
-import { Main } from '../remotion/MyComp/Main'
+import { RenderControls } from '../components/RenderControls.tsx'
+import { Spacing } from '../components/Spacing.tsx'
+import { Tips } from '../components/Tips/Tips.tsx'
+import { Main } from '../remotion/MyComp/Main.tsx'
 import {
   type CompositionProps,
   DURATION_IN_FRAMES,
@@ -16,7 +16,7 @@ import {
   VIDEO_HEIGHT,
   VIDEO_WIDTH,
   defaultMyCompProps,
-} from '../types/constants'
+} from '../types/constants.ts'
 
 const container: React.CSSProperties = {
   maxWidth: 768,
@@ -48,7 +48,7 @@ const Home: NextPage = () => {
   return (
     <div>
       <div style={container}>
-        <div class="cinematics" style={outer}>
+        <div className="cinematics" style={outer}>
           <Player
             component={Main}
             inputProps={inputProps}
@@ -62,12 +62,12 @@ const Home: NextPage = () => {
             loop={true}
           />
         </div>
-        <RenderControls text={text} setText={setText} inputProps={inputProps}></RenderControls>
-        <Spacing></Spacing>
-        <Spacing></Spacing>
-        <Spacing></Spacing>
-        <Spacing></Spacing>
-        <Tips></Tips>
+        <RenderControls text={text} setText={setText} inputProps={inputProps} />
+        <Spacing />
+        <Spacing />
+        <Spacing />
+        <Spacing />
+        <Tips />
       </div>
     </div>
   )

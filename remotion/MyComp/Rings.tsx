@@ -24,7 +24,7 @@ const RadialGradient: React.FC<{
           position: 'absolute',
           boxShadow: '0 0 100px rgba(0, 0, 0, 0.05)',
         }}
-      ></div>
+      />
     </AbsoluteFill>
   )
 }
