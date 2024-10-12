@@ -38,3 +38,6 @@ out/
 .env
 
 .idea/
+## Panda
+styled-system
+styled-system-studio

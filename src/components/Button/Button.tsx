@@ -1,7 +1,7 @@
 import type React from 'react'
 import { forwardRef } from 'react'
-import { Spacing } from '../Spacing'
-import { Spinner } from '../Spinner/Spinner'
+import { Spacing } from '../Spacing.tsx'
+import { Spinner } from '../Spinner/Spinner.tsx'
 import styles from './styles.module.css'
 
 const ButtonForward: React.ForwardRefRenderFunction<

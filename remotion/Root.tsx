@@ -1,4 +1,3 @@
-import { Composition } from 'remotion'
 import {
   COMP_NAME,
   DURATION_IN_FRAMES,
@@ -6,7 +5,8 @@ import {
   VIDEO_HEIGHT,
   VIDEO_WIDTH,
   defaultMyCompProps,
-} from '../types/constants'
+} from '@/src/types/constants'
+import { Composition } from 'remotion'
 import { Main } from './MyComp/Main'
 import { NextLogo } from './MyComp/NextLogo'
 

@@ -1,5 +1,5 @@
 import { z } from 'zod'
-import { CompositionProps } from './constants'
+import { CompositionProps } from './constants.ts'
 
 export const RenderRequest = z.object({
   id: z.string(),

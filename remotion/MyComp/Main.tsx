@@ -1,4 +1,4 @@
-import type { CompositionProps } from '@/types/constants.ts'
+import type { CompositionProps } from '@/src/types/constants.ts'
 import { fontFamily, loadFont } from '@remotion/google-fonts/Inter'
 import type React from 'react'
 import { useMemo } from 'react'

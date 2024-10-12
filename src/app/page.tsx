@@ -1,14 +1,8 @@
 'use client'
 
-import { Player } from '@remotion/player'
-import type { NextPage } from 'next'
-import type React from 'react'
-import { useMemo, useState } from 'react'
-import type { z } from 'zod'
-import { RenderControls } from '../components/RenderControls.tsx'
-import { Spacing } from '../components/Spacing.tsx'
-import { Tips } from '../components/Tips/Tips.tsx'
-import { Main } from '../remotion/MyComp/Main.tsx'
+import { RenderControls } from '@/src/components/RenderControls.tsx'
+import { Spacing } from '@/src/components/Spacing.tsx'
+import { Tips } from '@/src/components/Tips/Tips.tsx'
 import {
   type CompositionProps,
   DURATION_IN_FRAMES,
@@ -16,7 +10,13 @@ import {
   VIDEO_HEIGHT,
   VIDEO_WIDTH,
   defaultMyCompProps,
-} from '../types/constants.ts'
+} from '@/src/types/constants.ts'
+import { Player } from '@remotion/player'
+import type { NextPage } from 'next'
+import type React from 'react'
+import { useMemo, useState } from 'react'
+import type { z } from 'zod'
+import { Main } from '../../remotion/MyComp/Main.tsx'
 
 const container: React.CSSProperties = {
   maxWidth: 768,

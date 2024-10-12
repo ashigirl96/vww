@@ -1,7 +1,7 @@
+import type { CompositionProps } from '@/src/types/constants'
 import { useCallback, useMemo, useState } from 'react'
 import type { z } from 'zod'
 import { getProgress, renderVideo } from '../lambda/api'
-import type { CompositionProps } from '../types/constants'
 
 export type State =
   | {

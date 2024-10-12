@@ -1,7 +1,7 @@
 import type React from 'react'
-import type { State } from '../helpers/use-rendering'
-import { Button } from './Button/Button'
-import { Spacing } from './Spacing'
+import type { State } from '../../helpers/use-rendering.ts'
+import { Button } from './Button/Button.tsx'
+import { Spacing } from './Spacing.tsx'
 
 const light: React.CSSProperties = {
   opacity: 0.6,

@@ -9,7 +9,8 @@
     "check": "biome check . --write",
     "remotion": "remotionb studio",
     "render": "remotionb render",
-    "deploy": "node deploy.mjs"
+    "deploy": "node deploy.mjs",
+    "prepare": "panda codegen"
   },
   "dependencies": {
     "@remotion/bundler": "4.0.221",
@@ -27,6 +28,7 @@
   },
   "devDependencies": {
     "@biomejs/biome": "^1.9.3",
+    "@pandacss/dev": "0.46.1",
     "@remotion/eslint-config": "4.0.221",
     "@remotion/eslint-plugin": "4.0.221",
     "@types/node": "20.14.11",
