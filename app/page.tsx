@@ -1,53 +1,54 @@
-"use client";
+'use client'
 
-import { Player } from "@remotion/player";
-import type { NextPage } from "next";
-import React, { useMemo, useState } from "react";
-import { Main } from "../remotion/MyComp/Main";
+import { Player } from '@remotion/player'
+import type { NextPage } from 'next'
+import type React from 'react'
+import { useMemo, useState } from 'react'
+import type { z } from 'zod'
+import { RenderControls } from '../components/RenderControls'
+import { Spacing } from '../components/Spacing'
+import { Tips } from '../components/Tips/Tips'
+import { Main } from '../remotion/MyComp/Main'
 import {
-  CompositionProps,
-  defaultMyCompProps,
+  type CompositionProps,
   DURATION_IN_FRAMES,
   VIDEO_FPS,
   VIDEO_HEIGHT,
   VIDEO_WIDTH,
-} from "../types/constants";
-import { z } from "zod";
-import { RenderControls } from "../components/RenderControls";
-import { Tips } from "../components/Tips/Tips";
-import { Spacing } from "../components/Spacing";
+  defaultMyCompProps,
+} from '../types/constants'
 
 const container: React.CSSProperties = {
   maxWidth: 768,
-  margin: "auto",
+  margin: 'auto',
   marginBottom: 20,
-};
+}
 
 const outer: React.CSSProperties = {
-  borderRadius: "var(--geist-border-radius)",
-  overflow: "hidden",
-  boxShadow: "0 0 200px rgba(0, 0, 0, 0.15)",
+  borderRadius: 'var(--geist-border-radius)',
+  overflow: 'hidden',
+  boxShadow: '0 0 200px rgba(0, 0, 0, 0.15)',
   marginBottom: 40,
   marginTop: 60,
-};
+}
 
 const player: React.CSSProperties = {
-  width: "100%",
-};
+  width: '100%',
+}
 
 const Home: NextPage = () => {
-  const [text, setText] = useState<string>(defaultMyCompProps.title);
+  const [text, setText] = useState<string>(defaultMyCompProps.title)
 
   const inputProps: z.infer<typeof CompositionProps> = useMemo(() => {
     return {
       title: text,
-    };
-  }, [text]);
+    }
+  }, [text])
 
   return (
     <div>
       <div style={container}>
-        <div className="cinematics" style={outer}>
+        <div class="cinematics" style={outer}>
           <Player
             component={Main}
             inputProps={inputProps}
@@ -56,16 +57,12 @@ const Home: NextPage = () => {
             compositionHeight={VIDEO_HEIGHT}
             compositionWidth={VIDEO_WIDTH}
             style={player}
-            controls
-            autoPlay
-            loop
+            controls={true}
+            autoPlay={true}
+            loop={true}
           />
         </div>
-        <RenderControls
-          text={text}
-          setText={setText}
-          inputProps={inputProps}
-        ></RenderControls>
+        <RenderControls text={text} setText={setText} inputProps={inputProps}></RenderControls>
         <Spacing></Spacing>
         <Spacing></Spacing>
         <Spacing></Spacing>
@@ -73,7 +70,7 @@ const Home: NextPage = () => {
         <Tips></Tips>
       </div>
     </div>
-  );
-};
+  )
+}
 
-export default Home;
+export default Home

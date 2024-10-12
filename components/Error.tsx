@@ -1,20 +1,20 @@
-import React from "react";
+import type React from 'react'
 
 const container: React.CSSProperties = {
-  color: "var(--geist-error)",
-  fontFamily: "var(--geist-font)",
-  paddingTop: "var(--geist-half-pad)",
-  paddingBottom: "var(--geist-half-pad)",
-};
+  color: 'var(--geist-error)',
+  fontFamily: 'var(--geist-font)',
+  paddingTop: 'var(--geist-half-pad)',
+  paddingBottom: 'var(--geist-half-pad)',
+}
 
 const icon: React.CSSProperties = {
   height: 20,
-  verticalAlign: "text-bottom",
+  verticalAlign: 'text-bottom',
   marginRight: 6,
-};
+}
 
 export const ErrorComp: React.FC<{
-  message: string;
+  message: string
 }> = ({ message }) => {
   return (
     <div style={container}>
@@ -34,5 +34,5 @@ export const ErrorComp: React.FC<{
       </svg>
       <strong>Error:</strong> {message}
     </div>
-  );
-};
+  )
+}

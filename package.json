@@ -2,6 +2,15 @@
   "name": "vww",
   "version": "0.1.0",
   "private": true,
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "check": "biome check . --write",
+    "remotion": "remotionb studio",
+    "render": "remotionb render",
+    "deploy": "node deploy.mjs"
+  },
   "dependencies": {
     "@remotion/bundler": "4.0.221",
     "@remotion/cli": "4.0.221",
@@ -17,6 +26,7 @@
     "zod": "3.22.3"
   },
   "devDependencies": {
+    "@biomejs/biome": "^1.9.3",
     "@remotion/eslint-config": "4.0.221",
     "@remotion/eslint-plugin": "4.0.221",
     "@types/node": "20.14.11",
@@ -26,16 +36,7 @@
     "dotenv": "16.0.3",
     "eslint": "8.56.0",
     "eslint-config-next": "14.2.13",
-    "typescript": "5.6.2",
-    "prettier": "3.3.3"
-  },
-  "scripts": {
-    "dev": "next dev",
-    "build": "next build",
-    "start": "next start",
-    "lint": "eslint .",
-    "remotion": "remotionb studio",
-    "render": "remotionb render",
-    "deploy": "node deploy.mjs"
+    "prettier": "3.3.3",
+    "typescript": "5.6.2"
   }
 }

@@ -1,11 +1,11 @@
-import React from "react";
+import type React from 'react'
 
 const container: React.CSSProperties = {
-  alignSelf: "flex-end",
-};
+  alignSelf: 'flex-end',
+}
 
 export const AlignEnd: React.FC<{
-  children: React.ReactNode;
+  children: React.ReactNode
 }> = ({ children }) => {
-  return <div style={container}>{children}</div>;
-};
+  return <div style={container}>{children}</div>
+}

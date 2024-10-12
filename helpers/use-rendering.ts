@@ -1,116 +1,113 @@
-import { z } from "zod";
-import { useCallback, useMemo, useState } from "react";
-import { getProgress, renderVideo } from "../lambda/api";
-import { CompositionProps } from "../types/constants";
+import { useCallback, useMemo, useState } from 'react'
+import type { z } from 'zod'
+import { getProgress, renderVideo } from '../lambda/api'
+import type { CompositionProps } from '../types/constants'
 
 export type State =
   | {
-      status: "init";
+      status: 'init'
     }
   | {
-      status: "invoking";
+      status: 'invoking'
     }
   | {
-      renderId: string;
-      bucketName: string;
-      progress: number;
-      status: "rendering";
+      renderId: string
+      bucketName: string
+      progress: number
+      status: 'rendering'
     }
   | {
-      renderId: string | null;
-      status: "error";
-      error: Error;
+      renderId: string | null
+      status: 'error'
+      error: Error
     }
   | {
-      url: string;
-      size: number;
-      status: "done";
-    };
+      url: string
+      size: number
+      status: 'done'
+    }
 
 const wait = async (milliSeconds: number) => {
   await new Promise<void>((resolve) => {
     setTimeout(() => {
-      resolve();
-    }, milliSeconds);
-  });
-};
+      resolve()
+    }, milliSeconds)
+  })
+}
 
-export const useRendering = (
-  id: string,
-  inputProps: z.infer<typeof CompositionProps>,
-) => {
+export const useRendering = (id: string, inputProps: z.infer<typeof CompositionProps>) => {
   const [state, setState] = useState<State>({
-    status: "init",
-  });
+    status: 'init',
+  })
 
   const renderMedia = useCallback(async () => {
     setState({
-      status: "invoking",
-    });
+      status: 'invoking',
+    })
     try {
-      const { renderId, bucketName } = await renderVideo({ id, inputProps });
+      const { renderId, bucketName } = await renderVideo({ id, inputProps })
       setState({
-        status: "rendering",
+        status: 'rendering',
         progress: 0,
         renderId: renderId,
         bucketName: bucketName,
-      });
+      })
 
-      let pending = true;
+      let pending = true
 
       while (pending) {
         const result = await getProgress({
           id: renderId,
           bucketName: bucketName,
-        });
+        })
         switch (result.type) {
-          case "error": {
+          case 'error': {
             setState({
-              status: "error",
+              status: 'error',
               renderId: renderId,
               error: new Error(result.message),
-            });
-            pending = false;
-            break;
+            })
+            pending = false
+            break
           }
-          case "done": {
+          case 'done': {
             setState({
               size: result.size,
               url: result.url,
-              status: "done",
-            });
-            pending = false;
-            break;
+              status: 'done',
+            })
+            pending = false
+            break
           }
-          case "progress": {
+          case 'progress': {
             setState({
-              status: "rendering",
+              status: 'rendering',
               bucketName: bucketName,
               progress: result.progress,
               renderId: renderId,
-            });
-            await wait(1000);
+            })
+            await wait(1000)
           }
         }
       }
     } catch (err) {
       setState({
-        status: "error",
+        status: 'error',
         error: err as Error,
         renderId: null,
-      });
+      })
     }
-  }, [id, inputProps]);
+  }, [id, inputProps])
 
   const undo = useCallback(() => {
-    setState({ status: "init" });
-  }, []);
+    setState({ status: 'init' })
+  }, [])
 
   return useMemo(() => {
     return {
       renderMedia,
       state,
       undo,
-    };
-  }, [renderMedia, state, undo]);
-};
+    }
+  }, [renderMedia, state, undo])
+}
