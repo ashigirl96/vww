@@ -18,9 +18,13 @@
   "linter": {
     "enabled": true,
     "rules": {
+      "a11y": {
+        "noSvgWithoutTitle": "off"
+      },
       "recommended": true,
       "nursery": {
-        "useSortedClasses": "warn"
+        "useSortedClasses": "warn",
+        "useImportRestrictions": "error"
       },
       "correctness": {
         "noUnusedImports": "warn",

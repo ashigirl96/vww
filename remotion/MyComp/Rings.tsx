@@ -1,6 +1,6 @@
+import { randomUUID } from '@/helpers/random-uuid.ts'
 import type React from 'react'
 import { AbsoluteFill, interpolateColors, useVideoConfig } from 'remotion'
-import { randomUUID } from '../../helpers/random-uuid.ts'
 
 const RadialGradient: React.FC<{
   radius: number
