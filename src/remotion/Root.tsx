@@ -1,3 +1,5 @@
+import { Main } from '@/remotion/MyComp/Main.tsx'
+import { NextLogo } from '@/remotion/MyComp/NextLogo.tsx'
 import {
   COMP_NAME,
   DURATION_IN_FRAMES,
@@ -5,10 +7,8 @@ import {
   VIDEO_HEIGHT,
   VIDEO_WIDTH,
   defaultMyCompProps,
-} from '@/src/types/constants'
+} from '@/types/constants'
 import { Composition } from 'remotion'
-import { Main } from './MyComp/Main'
-import { NextLogo } from './MyComp/NextLogo'
 
 export const RemotionRoot: React.FC = () => {
   return (

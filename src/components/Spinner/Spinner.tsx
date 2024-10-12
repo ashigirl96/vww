@@ -1,8 +1,8 @@
+import { randomUUID } from '@/helpers/random-uuid.ts'
 import { translatePath } from '@remotion/paths'
 import { makeRect } from '@remotion/shapes'
 import type React from 'react'
 import { useMemo } from 'react'
-import { randomUUID } from '../../../helpers/random-uuid.ts'
 import styles from './styles.module.css'
 
 const viewBox = 100

@@ -1,6 +1,6 @@
-import { COMP_NAME, type CompositionProps } from '@/src/types/constants.ts'
+import { useRendering } from '@/helpers/use-rendering.ts'
+import { COMP_NAME, type CompositionProps } from '@/types/constants.ts'
 import type { z } from 'zod'
-import { useRendering } from '../../helpers/use-rendering.ts'
 import { AlignEnd } from './AlignEnd.tsx'
 import { Button } from './Button/Button.tsx'
 import { InputContainer } from './Container.tsx'

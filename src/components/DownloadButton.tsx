@@ -1,5 +1,5 @@
+import type { State } from '@/helpers/use-rendering.ts'
 import type React from 'react'
-import type { State } from '../../helpers/use-rendering.ts'
 import { Button } from './Button/Button.tsx'
 import { Spacing } from './Spacing.tsx'
 

@@ -1,8 +1,8 @@
-import { RenderRequest } from '@/src/types/schema'
+import { executeApi } from '@/helpers/api-response.ts'
+import { RenderRequest } from '@/types/schema'
 import type { AwsRegion, RenderMediaOnLambdaOutput } from '@remotion/lambda/client'
 import { renderMediaOnLambda, speculateFunctionName } from '@remotion/lambda/client'
 import { DISK, RAM, REGION, SITE_NAME, TIMEOUT } from '../../../../../config.mjs'
-import { executeApi } from '../../../../../helpers/api-response.ts'
 
 export const POST = executeApi<RenderMediaOnLambdaOutput, typeof RenderRequest>(
   RenderRequest,

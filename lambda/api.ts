@@ -1,8 +1,8 @@
-import type { CompositionProps } from '@/src/types/constants'
-import type { ProgressRequest, ProgressResponse, RenderRequest } from '@/src/types/schema'
+import type { ApiResponse } from '@/helpers/api-response'
+import type { CompositionProps } from '@/types/constants'
+import type { ProgressRequest, ProgressResponse, RenderRequest } from '@/types/schema'
 import type { RenderMediaOnLambdaOutput } from '@remotion/lambda/client'
 import type { z } from 'zod'
-import type { ApiResponse } from '../helpers/api-response'
 
 const makeRequest = async <Res>(endpoint: string, body: unknown): Promise<Res> => {
   const result = await fetch(endpoint, {
