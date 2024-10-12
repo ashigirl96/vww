@@ -1,5 +1,5 @@
-import '@/styles/global.css'
 import type { Metadata } from 'next'
+import '@/style.css'
 
 export const metadata: Metadata = {
   title: 'Remotion and Next.js',
