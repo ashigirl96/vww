@@ -1,4 +1,4 @@
-import path from 'path'
+import path from 'node:path'
 import { deployFunction, deploySite, getOrCreateBucket } from '@remotion/lambda'
 import dotenv from 'dotenv'
 import { RAM, REGION, SITE_NAME, TIMEOUT } from './config.mjs'

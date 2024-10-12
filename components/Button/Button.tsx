@@ -17,14 +17,15 @@ const ButtonForward: React.ForwardRefRenderFunction<
   return (
     <button
       ref={ref}
-      class={[styles.button, secondary ? styles.secondarybutton : undefined].join(' ')}
+      className={[styles.button, secondary ? styles.secondarybutton : undefined].join('')}
       onClick={onClick}
       disabled={disabled}
+      type="button"
     >
       {loading && (
         <>
-          <Spinner size={20}></Spinner>
-          <Spacing></Spacing>
+          <Spinner size={20} />
+          <Spacing />
         </>
       )}
       {children}

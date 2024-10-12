@@ -2,6 +2,7 @@ import { translatePath } from '@remotion/paths'
 import { makeRect } from '@remotion/shapes'
 import type React from 'react'
 import { useMemo } from 'react'
+import { randomUUID } from '../../helpers/random-uuid.ts'
 import styles from './styles.module.css'
 
 const viewBox = 100
@@ -27,20 +28,21 @@ export const Spinner: React.FC<{
   }, [size])
 
   return (
+    // <svg style={style} viewBox={`0 0 ${viewBox} ${viewBox}`}>
     <svg style={style} viewBox={`0 0 ${viewBox} ${viewBox}`}>
       {new Array(lines).fill(true).map((_, index) => {
         return (
           <path
-            class={styles.line}
+            className={styles.line}
             style={{
               rotate: `${(index * Math.PI * 2) / lines}rad`,
               transformOrigin: 'center center',
               animationDelay: `${index * 0.1 - lines * 0.1}s`,
             }}
-            key={index}
+            key={`line-${randomUUID()}`}
             d={translated}
             fill="var(--foreground)"
-          ></path>
+          />
         )
       })}
     </svg>

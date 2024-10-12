@@ -21,8 +21,8 @@ export const RenderControls: React.FC<{
     <InputContainer>
       {state.status === 'init' || state.status === 'invoking' || state.status === 'error' ? (
         <>
-          <Input disabled={state.status === 'invoking'} setText={setText} text={text}></Input>
-          <Spacing></Spacing>
+          <Input disabled={state.status === 'invoking'} setText={setText} text={text} />
+          <Spacing />
           <AlignEnd>
             <Button
               disabled={state.status === 'invoking'}
@@ -32,15 +32,15 @@ export const RenderControls: React.FC<{
               Render video
             </Button>
           </AlignEnd>
-          {state.status === 'error' ? <ErrorComp message={state.error.message}></ErrorComp> : null}
+          {state.status === 'error' ? <ErrorComp message={state.error.message} /> : null}
         </>
       ) : null}
       {state.status === 'rendering' || state.status === 'done' ? (
         <>
           <ProgressBar progress={state.status === 'rendering' ? state.progress : 1} />
-          <Spacing></Spacing>
+          <Spacing />
           <AlignEnd>
-            <DownloadButton undo={undo} state={state}></DownloadButton>
+            <DownloadButton undo={undo} state={state} />
           </AlignEnd>
         </>
       ) : null}

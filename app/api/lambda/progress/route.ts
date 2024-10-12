@@ -5,7 +5,7 @@ import { ProgressRequest, type ProgressResponse } from '../../../../types/schema
 
 export const POST = executeApi<ProgressResponse, typeof ProgressRequest>(
   ProgressRequest,
-  async (req, body) => {
+  async (_req, body) => {
     const renderProgress = await getRenderProgress({
       bucketName: body.bucketName,
       functionName: speculateFunctionName({

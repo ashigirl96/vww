@@ -1,5 +1,6 @@
 import type React from 'react'
 import { AbsoluteFill, interpolateColors, useVideoConfig } from 'remotion'
+import { randomUUID } from '../../helpers/random-uuid.ts'
 
 const RadialGradient: React.FC<{
   radius: number
@@ -46,7 +47,7 @@ export const Rings: React.FC<{
         .map((_, i) => {
           return (
             <RadialGradient
-              key={i}
+              key={randomUUID()}
               radius={height * 0.3 * i}
               color={interpolateColors(i, [0, 4], ['#fff', '#fff'])}
             />

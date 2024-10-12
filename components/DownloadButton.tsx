@@ -43,14 +43,14 @@ export const DownloadButton: React.FC<{
   return (
     <div style={row}>
       <Button secondary={true} onClick={undo}>
-        <UndoIcon></UndoIcon>
+        <UndoIcon />
       </Button>
-      <Spacing></Spacing>
+      <Spacing />
       <a style={link} href={state.url}>
         <Button>
           Download video
-          <Spacing></Spacing>
-          <Megabytes sizeInBytes={state.size}></Megabytes>
+          <Spacing />
+          <Megabytes sizeInBytes={state.size} />
         </Button>
       </a>
     </div>
