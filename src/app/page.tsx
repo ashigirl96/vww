@@ -79,6 +79,7 @@ const DragAndDropDemo: React.FC = () => {
           width: '100%',
         }}
         component={Main}
+        clickToPlay={true}
         compositionHeight={1080}
         compositionWidth={1920}
         durationInFrames={300}

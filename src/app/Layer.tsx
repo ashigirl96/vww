@@ -57,22 +57,17 @@ export const Layer: React.FC<{
     }
   }, [item.color, item.height, item.left, item.top, item.width])
 
-  const _stopPropagation = (e: React.MouseEvent<HTMLInputElement>) => {
+  const _stopPropagation = (e: React.MouseEvent<HTMLDivElement>) => {
     // 親要素へのイベント伝播を防ぐ
     e.stopPropagation()
   }
 
   return (
     <Sequence key={item.id} from={item.from} durationInFrames={item.durationInFrames} layout="none">
-      <div style={style}>
-        {/*<input*/}
-        {/*  className={'h-full w-full'}*/}
-        {/*  // style={style}*/}
-        {/*  onMouseDown={_stopPropagation} // マウスダウン時に親要素へのイベント伝播を防ぐ*/}
-        {/*  type="text"*/}
-        {/*  defaultValue="Resizable Input" // 初期値のテキスト*/}
-        {/*/>*/}
-
+      <div
+        style={style}
+        onPointerDown={_stopPropagation} // input要素へのポインターエンターでイベントを止める
+      >
         <div
           style={{
             position: 'absolute',
@@ -86,7 +81,6 @@ export const Layer: React.FC<{
         >
           <input
             className={'h-full w-full'}
-            onMouseDown={_stopPropagation} // input要素へのマウスダウンでイベントを止める
             type="text"
             defaultValue="Resizable Input" // 初期値のテキスト
           />
