@@ -1,9 +1,9 @@
 'use client'
 
 import type { Item } from '@/types/item.ts'
-import { Player } from '@remotion/player'
+import { Player, type PlayerRef } from '@remotion/player'
 import type React from 'react'
-import { useCallback, useMemo, useState } from 'react'
+import { useCallback, useMemo, useRef, useState } from 'react'
 import type { MainProps } from './Main'
 import { Main } from './Main'
 import '@/style.css'
@@ -56,14 +56,28 @@ const DragAndDropDemo: React.FC = () => {
     }
   }, [changeItem, items, selectedItem])
 
+  const playerRef = useRef<PlayerRef>(null)
+
+  const _handlePlay = () => {
+    if (playerRef.current) {
+      playerRef.current.play()
+    }
+  }
+
+  const _handlePause = () => {
+    if (playerRef.current) {
+      playerRef.current.pause()
+    }
+  }
+
   return (
     <>
       <Player
+        ref={playerRef}
         style={{
           // width: '50vw',
           width: '100%',
         }}
-        controls={true}
         component={Main}
         compositionHeight={1080}
         compositionWidth={1920}
@@ -72,6 +86,10 @@ const DragAndDropDemo: React.FC = () => {
         inputProps={inputProps}
         overflowVisible
       />
+      <div>
+        <button onClick={_handlePlay}>再生</button>
+        <button onClick={_handlePause}>停止</button>
+      </div>
     </>
   )
 }
