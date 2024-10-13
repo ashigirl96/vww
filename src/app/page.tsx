@@ -47,6 +47,22 @@ const DragAndDropDemo: React.FC = () => {
     })
   }, [])
 
+  const addItems = useCallback(() => {
+    setItems((oldItems) => {
+      const lastItem = oldItems[oldItems.length - 1]
+      return [
+        ...oldItems,
+        {
+          ...lastItem,
+          id: lastItem.id + 1,
+          left: lastItem.left + 10,
+          top: lastItem.top + 10,
+          color: 'red',
+        },
+      ]
+    })
+  }, [])
+
   const inputProps: MainProps = useMemo(() => {
     return {
       items,
@@ -90,6 +106,7 @@ const DragAndDropDemo: React.FC = () => {
       <div>
         <button onClick={_handlePlay}>再生</button>
         <button onClick={_handlePause}>停止</button>
+        <button onClick={addItems}>追加</button>
       </div>
     </>
   )

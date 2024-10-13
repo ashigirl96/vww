@@ -28,7 +28,7 @@ export const Main: React.FC<MainProps> = ({ items, setSelectedItem, selectedItem
   return (
     <AbsoluteFill className={'bg-amber-100'} onPointerDown={onPointerDown}>
       <Video
-        muted={true}
+        // muted={true}
         loop
         src={staticFile('videos/sample.mp4')}
         style={{
