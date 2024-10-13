@@ -11,6 +11,7 @@ export const ResizeHandle: React.FC<{
   item: Item
 }> = ({ type, setItem, item }) => {
   const scale = useCurrentScale()
+  console.log('scale:', scale)
   const size = Math.round(HANDLE_SIZE / scale)
   const borderSize = 1 / scale
 

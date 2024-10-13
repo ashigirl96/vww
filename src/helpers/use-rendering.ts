@@ -1,7 +1,7 @@
+import { getProgress, renderVideo } from '@/lambda/api.ts'
 import type { CompositionProps } from '@/types/constants.ts'
 import { useCallback, useMemo, useState } from 'react'
 import type { z } from 'zod'
-import { getProgress, renderVideo } from '../../lambda/api.ts'
 
 export type State =
   | {

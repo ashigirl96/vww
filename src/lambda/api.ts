@@ -1,6 +1,6 @@
-import type { ApiResponse } from '@/helpers/api-response'
-import type { CompositionProps } from '@/types/constants'
-import type { ProgressRequest, ProgressResponse, RenderRequest } from '@/types/schema'
+import type { ApiResponse } from '@/helpers/api-response.ts'
+import type { CompositionProps } from '@/types/constants.ts'
+import type { ProgressRequest, ProgressResponse, RenderRequest } from '@/types/schema.ts'
 import type { RenderMediaOnLambdaOutput } from '@remotion/lambda/client'
 import type { z } from 'zod'
 
@@ -27,11 +27,11 @@ export const renderVideo = async ({
   id: string
   inputProps: z.infer<typeof CompositionProps>
 }) => {
+  // Lambdaでのレンダリング
   const body: z.infer<typeof RenderRequest> = {
     id,
     inputProps,
   }
-
   return makeRequest<RenderMediaOnLambdaOutput>('/api/lambda/render', body)
 }
 
