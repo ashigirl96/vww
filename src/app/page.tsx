@@ -6,8 +6,7 @@ import type React from 'react'
 import { useCallback, useMemo, useRef, useState } from 'react'
 import '@/style.css'
 import { renderVideo } from '@/lambda/render.ts'
-import type { MainProps } from '@/remotion/MyComp/Main.tsx'
-import { Main } from 'next/document'
+import { Main, type MainProps } from '@/remotion/MyComp/Main.tsx'
 
 const DragAndDropDemo: React.FC = () => {
   const [items, setItems] = useState<Item[]>([
@@ -105,10 +104,23 @@ const DragAndDropDemo: React.FC = () => {
         overflowVisible
       />
       <div>
-        <button onClick={_handlePlay}>再生</button>
-        <button onClick={_handlePause}>停止</button>
-        <button onClick={addItems}>追加</button>
-        <button onClick={() => renderVideo({ id: 'Main', inputProps })}>レンダリング</button>
+        <button type={'button'} onClick={_handlePlay}>
+          再生
+        </button>
+        <button type={'button'} onClick={_handlePause}>
+          停止
+        </button>
+        <button type={'button'} onClick={addItems}>
+          追加
+        </button>
+        <button
+          type={'button'}
+          onClick={async () => {
+            await renderVideo({ id: 'Main', inputProps })
+          }}
+        >
+          レンダリング
+        </button>
       </div>
     </>
   )

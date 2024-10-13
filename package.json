@@ -21,7 +21,7 @@
     "@remotion/paths": "4.0.221",
     "@remotion/player": "4.0.221",
     "@remotion/shapes": "4.0.221",
-    "next": "14.2.13",
+    "next": "14.2.15",
     "react": "18.3.1",
     "react-dom": "18.3.1",
     "remotion": "4.0.221",

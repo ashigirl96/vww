@@ -1,6 +1,5 @@
 import '@/style.css'
 import { Main, type MainProps } from '@/remotion/MyComp/Main.tsx'
-import { NextLogo } from '@/remotion/MyComp/NextLogo.tsx'
 import {
   COMP_NAME,
   DURATION_IN_FRAMES,
@@ -70,17 +69,6 @@ export const RemotionRoot: React.FC = () => {
         width={VIDEO_WIDTH}
         height={VIDEO_HEIGHT}
         defaultProps={inputProps}
-      />
-      <Composition
-        id="NextLogo"
-        component={NextLogo}
-        durationInFrames={300}
-        fps={30}
-        width={140}
-        height={140}
-        defaultProps={{
-          outProgress: 0,
-        }}
       />
     </>
   )

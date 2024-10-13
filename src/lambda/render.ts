@@ -1,16 +1,16 @@
+'use server'
+
 import path from 'node:path'
-import type { CompositionProps } from '@/types/constants.ts'
+import type { MainProps } from '@/remotion/MyComp/Main.tsx'
 import { bundle } from '@remotion/bundler'
 import { renderMedia, selectComposition } from '@remotion/renderer'
-import type { z } from 'zod'
 
 export const renderVideo = async ({
   id,
   inputProps,
 }: {
   id: string
-  inputProps: z.infer<typeof CompositionProps>
-  useLambda?: boolean // デフォルトではLambdaを使用
+  inputProps: MainProps
 }) => {
   const bundleLocation = await bundle({
     entryPoint: path.resolve('./src/remotion/index.ts'),
