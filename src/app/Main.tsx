@@ -23,9 +23,19 @@ export const Main: React.FC<MainProps> = ({ items, setSelectedItem, selectedItem
     },
     [setSelectedItem],
   )
+  console.log(selectedItem)
 
   return (
     <AbsoluteFill className={'bg-amber-100'} onPointerDown={onPointerDown}>
+      <Video
+        muted={true}
+        loop
+        src={staticFile('videos/sample.mp4')}
+        style={{
+          position: 'absolute',
+          zIndex: 0, // 背面に配置
+        }}
+      />
       <AbsoluteFill className={'overflow-hidden'}>
         {items.map((item) => {
           return <Layer key={item.id} item={item} />
@@ -36,14 +46,6 @@ export const Main: React.FC<MainProps> = ({ items, setSelectedItem, selectedItem
         items={items}
         setSelectedItem={setSelectedItem}
         changeItem={changeItem}
-      />
-      <Video
-        muted={true}
-        src={staticFile('videos/sample.mp4')}
-        style={{
-          position: 'absolute',
-          zIndex: 0, // 背面に配置
-        }}
       />
     </AbsoluteFill>
   )

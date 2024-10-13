@@ -14,7 +14,7 @@ const DragAndDropDemo: React.FC = () => {
       left: 395,
       top: 270,
       width: 540,
-      durationInFrames: 100,
+      durationInFrames: 300,
       from: 0,
       height: 540,
       id: 0,
@@ -25,7 +25,7 @@ const DragAndDropDemo: React.FC = () => {
       left: 985,
       top: 270,
       width: 540,
-      durationInFrames: 100,
+      durationInFrames: 300,
       from: 0,
       height: 540,
       id: 1,
@@ -57,19 +57,22 @@ const DragAndDropDemo: React.FC = () => {
   }, [changeItem, items, selectedItem])
 
   return (
-    <Player
-      style={{
-        width: '100%',
-      }}
-      // controls={true}
-      component={Main}
-      compositionHeight={1080}
-      compositionWidth={1920}
-      durationInFrames={300}
-      fps={30}
-      inputProps={inputProps}
-      overflowVisible
-    />
+    <>
+      <Player
+        style={{
+          // width: '50vw',
+          width: '100%',
+        }}
+        controls={true}
+        component={Main}
+        compositionHeight={1080}
+        compositionWidth={1920}
+        durationInFrames={300}
+        fps={30}
+        inputProps={inputProps}
+        overflowVisible
+      />
+    </>
   )
 }
 
