@@ -1,76 +1,76 @@
 'use client'
 
-import { RenderControls } from '@/components/RenderControls.tsx'
-import { Spacing } from '@/components/Spacing.tsx'
-import { Tips } from '@/components/Tips/Tips.tsx'
-import { Main } from '@/remotion/MyComp/Main.tsx'
-import {
-  type CompositionProps,
-  DURATION_IN_FRAMES,
-  VIDEO_FPS,
-  VIDEO_HEIGHT,
-  VIDEO_WIDTH,
-  defaultMyCompProps,
-} from '@/types/constants.ts'
+import type { Item } from '@/types/item.ts'
 import { Player } from '@remotion/player'
-import type { NextPage } from 'next'
 import type React from 'react'
-import { useMemo, useState } from 'react'
-import type { z } from 'zod'
+import { useCallback, useMemo, useState } from 'react'
+import type { MainProps } from './Main'
+import { Main } from './Main'
+import '@/style.css'
 
-const container: React.CSSProperties = {
-  maxWidth: 768,
-  margin: 'auto',
-  marginBottom: 20,
-}
+const DragAndDropDemo: React.FC = () => {
+  const [items, setItems] = useState<Item[]>([
+    {
+      left: 395,
+      top: 270,
+      width: 540,
+      durationInFrames: 100,
+      from: 0,
+      height: 540,
+      id: 0,
+      color: '#ccc',
+      isDragging: false,
+    },
+    {
+      left: 985,
+      top: 270,
+      width: 540,
+      durationInFrames: 100,
+      from: 0,
+      height: 540,
+      id: 1,
+      color: '#ccc',
+      isDragging: false,
+    },
+  ])
+  const [selectedItem, setSelectedItem] = useState<number | null>(null)
 
-const outer: React.CSSProperties = {
-  borderRadius: 'var(--geist-border-radius)',
-  overflow: 'hidden',
-  boxShadow: '0 0 200px rgba(0, 0, 0, 0.15)',
-  marginBottom: 40,
-  marginTop: 60,
-}
+  const changeItem = useCallback((itemId: number, updater: (item: Item) => Item) => {
+    setItems((oldItems) => {
+      return oldItems.map((item) => {
+        if (item.id === itemId) {
+          return updater(item)
+        }
 
-const player: React.CSSProperties = {
-  width: '100%',
-}
+        return item
+      })
+    })
+  }, [])
 
-const Home: NextPage = () => {
-  const [text, setText] = useState<string>(defaultMyCompProps.title)
-
-  const inputProps: z.infer<typeof CompositionProps> = useMemo(() => {
+  const inputProps: MainProps = useMemo(() => {
     return {
-      title: text,
+      items,
+      setSelectedItem,
+      changeItem,
+      selectedItem,
     }
-  }, [text])
+  }, [changeItem, items, selectedItem])
 
   return (
-    <div>
-      <div style={container}>
-        <div style={outer}>
-          <Player
-            component={Main}
-            inputProps={inputProps}
-            durationInFrames={DURATION_IN_FRAMES}
-            fps={VIDEO_FPS}
-            compositionHeight={VIDEO_HEIGHT}
-            compositionWidth={VIDEO_WIDTH}
-            style={player}
-            controls={true}
-            autoPlay={true}
-            loop={true}
-          />
-        </div>
-        <RenderControls text={text} setText={setText} inputProps={inputProps} />
-        <Spacing />
-        <Spacing />
-        <Spacing />
-        <Spacing />
-        <Tips />
-      </div>
-    </div>
+    <Player
+      style={{
+        width: '100%',
+      }}
+      // controls={true}
+      component={Main}
+      compositionHeight={1080}
+      compositionWidth={1920}
+      durationInFrames={300}
+      fps={30}
+      inputProps={inputProps}
+      overflowVisible
+    />
   )
 }
 
-export default Home
+export default DragAndDropDemo
