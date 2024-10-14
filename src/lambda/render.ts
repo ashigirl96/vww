@@ -2,7 +2,7 @@
 
 import path from 'node:path'
 import type { MainProps } from '@/remotion/MyComp/Main.tsx'
-import { bundle } from '@remotion/bundler'
+import { bundle } from '@remotion/bundler/dist/bundle.js'
 import { renderMedia, selectComposition } from '@remotion/renderer'
 
 export const renderVideo = async ({

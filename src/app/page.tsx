@@ -5,7 +5,7 @@ import { Player, type PlayerRef } from '@remotion/player'
 import type React from 'react'
 import { useCallback, useMemo, useRef, useState } from 'react'
 import '@/style.css'
-import { renderVideo } from '@/lambda/render.ts'
+import { RenderControls } from '@/components/RenderControls.tsx'
 import { Main, type MainProps } from '@/remotion/MyComp/Main.tsx'
 
 const DragAndDropDemo: React.FC = () => {
@@ -113,14 +113,15 @@ const DragAndDropDemo: React.FC = () => {
         <button type={'button'} onClick={addItems}>
           追加
         </button>
-        <button
-          type={'button'}
-          onClick={async () => {
-            await renderVideo({ id: 'Main', inputProps })
-          }}
-        >
-          レンダリング
-        </button>
+        <RenderControls />
+        {/*<button*/}
+        {/*  type={'button'}*/}
+        {/*  onClick={async () => {*/}
+        {/*    await renderVideo({ id: 'Main', inputProps })*/}
+        {/*  }}*/}
+        {/*>*/}
+        {/*  レンダリング*/}
+        {/*</button>*/}
       </div>
     </>
   )
