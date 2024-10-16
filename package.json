@@ -26,6 +26,8 @@
     "next": "14.2.15",
     "react": "18.3.1",
     "react-dom": "18.3.1",
+    "react-moveable": "0.56.0",
+    "react-selecto": "1.26.3",
     "remotion": "4.0.221",
     "zod": "3.22.3"
   },
