@@ -1,6 +1,7 @@
 'use client'
 
-import React from 'react'
+import { invoke } from '@tauri-apps/api/core'
+import React, { useCallback } from 'react'
 import Moveable, { type OnClickGroup, type OnRender, type OnRenderGroup } from 'react-moveable'
 import Selecto, { type OnDragStart, type OnSelect, type OnSelectEnd } from 'react-selecto'
 
@@ -13,8 +14,21 @@ export default function App(): JSX.Element {
   // 編集可能な要素のインデックスを管理する状態
   const [editingCubes, setEditingCubes] = React.useState<Set<number>>(new Set())
 
+  const executeCommand = useCallback(async () => {
+    const result = await invoke<string>('greet', { name: 'Hello from React!' })
+    console.log(result)
+  }, [])
+
   return (
     <div className="moveable relative box-border flex min-h-full items-center justify-center px-[20px] py-[10px] text-center">
+      <div>
+        <button
+          className="rounded bg-blue-500 px-4 py-2 font-bold text-white hover:bg-blue-700"
+          onClick={executeCommand}
+        >
+          Execute Command
+        </button>
+      </div>
       <div className="max-w-[800px]">
         <Moveable
           ref={moveableRef}

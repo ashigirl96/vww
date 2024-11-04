@@ -10,7 +10,8 @@
     "remotion": "remotionb studio",
     "render": "remotionb render",
     "render:main": "remotionb render src/remotion/index.ts MyComp out/helloworld.mp4",
-    "deploy": "node deploy.mjs"
+    "deploy": "node deploy.mjs",
+    "tauri": "tauri"
   },
   "dependencies": {
     "@remotion/bundler": "4.0.221",
@@ -29,7 +30,9 @@
     "react-moveable": "0.56.0",
     "react-selecto": "1.26.3",
     "remotion": "4.0.221",
-    "zod": "3.22.3"
+    "zod": "3.22.3",
+    "@tauri-apps/api": "2.0.3",
+    "@tauri-apps/plugin-shell": "2.0.1"
   },
   "devDependencies": {
     "@biomejs/biome": "^1.9.3",
@@ -45,7 +48,8 @@
     "eslint-config-next": "14.2.13",
     "prettier": "3.3.3",
     "tsconfig-paths-webpack-plugin": "^4.1.0",
-    "typescript": "5.6.2"
+    "typescript": "5.6.2",
+    "@tauri-apps/cli": "2.0.4"
   },
   "sideEffects": ["*.css"],
   "workspaces": ["scripts/*"]
