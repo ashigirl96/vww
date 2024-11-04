@@ -5,10 +5,13 @@ import Moveable, { type OnClickGroup, type OnRender, type OnRenderGroup } from '
 import Selecto, { type OnDragStart, type OnSelect, type OnSelectEnd } from 'react-selecto'
 
 export default function App(): JSX.Element {
-  const cubes: number[] = Array.from({ length: 30 }, (_: undefined, i: number): number => i)
+  const cubes: number[] = Array.from({ length: 30 }, (_, i) => i)
   const [targets, setTargets] = React.useState<HTMLElement[]>([])
-  const moveableRef: React.MutableRefObject<Moveable | null> = React.useRef<Moveable | null>(null)
-  const selectoRef: React.MutableRefObject<Selecto | null> = React.useRef<Selecto | null>(null)
+  const moveableRef = React.useRef<Moveable | null>(null)
+  const selectoRef = React.useRef<Selecto | null>(null)
+
+  // 編集可能な要素のインデックスを管理する状態
+  const [editingCubes, setEditingCubes] = React.useState<Set<number>>(new Set())
 
   return (
     <div className="moveable relative box-border flex min-h-full items-center justify-center px-[20px] py-[10px] text-center">
@@ -39,10 +42,14 @@ export default function App(): JSX.Element {
           toggleContinueSelect={['shift']}
           ratio={0}
           onDragStart={(e: OnDragStart): void => {
-            const target: HTMLElement = e.inputEvent.target as HTMLElement
+            const target = e.inputEvent.target as HTMLElement
+            if (target.isContentEditable) {
+              // 編集中の要素の場合は何もしない
+              return
+            }
             if (
               moveableRef.current?.isMoveableElement(target) ||
-              targets.some((t: HTMLElement) => t === target || t.contains(target))
+              targets.some((t) => t === target || t.contains(target))
             ) {
               e.stop()
             }
@@ -53,6 +60,11 @@ export default function App(): JSX.Element {
           }}
           onSelectEnd={(e: OnSelectEnd): void => {
             if (e.isDragStartEnd) {
+              const target = e.inputEvent.target as HTMLElement
+              if (target.isContentEditable) {
+                // 編集中の要素の場合はドラッグを開始しない
+                return
+              }
               e.inputEvent.preventDefault()
               moveableRef.current?.waitToChangeTarget().then(() => {
                 moveableRef.current?.dragStart(e.inputEvent)
@@ -65,9 +77,27 @@ export default function App(): JSX.Element {
           {cubes.map(
             (i: number): JSX.Element => (
               <div
-                className="cube target m-[4px] inline-block h-[40px] w-[40px] rounded-[5px] bg-[#eeeeee] leading-[40px]"
+                className="cube target m-[4px] inline-block h-[100px] w-[200px] rounded-[5px] bg-[#eeeeee] leading-[40px]"
+                contentEditable={editingCubes.has(i)}
                 key={i}
-              />
+                onMouseDown={(e: React.MouseEvent<HTMLDivElement>): void => {
+                  e.stopPropagation()
+                }}
+                onDoubleClick={(_e: React.MouseEvent<HTMLDivElement>): void => {
+                  // ダブルクリックで編集可能にする
+                  setEditingCubes((prev) => new Set(prev).add(i))
+                }}
+                onBlur={(): void => {
+                  // フォーカスが外れたら編集モードを解除
+                  setEditingCubes((prev) => {
+                    const newSet = new Set(prev)
+                    newSet.delete(i)
+                    return newSet
+                  })
+                }}
+              >
+                Hello {i}
+              </div>
             ),
           )}
         </div>
