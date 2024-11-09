@@ -5,8 +5,16 @@
 
 import { Config } from '@remotion/cli/config'
 import { enableTailwind } from '@remotion/tailwind'
+import { TsconfigPathsPlugin } from 'tsconfig-paths-webpack-plugin'
 
 Config.setVideoImageFormat('jpeg')
 Config.overrideWebpackConfig((currentConfiguration) => {
-  return enableTailwind(currentConfiguration)
+  const withTailwind = enableTailwind(currentConfiguration)
+  return {
+    ...withTailwind,
+    resolve: {
+      ...withTailwind.resolve,
+      plugins: [...(withTailwind.resolve?.plugins ?? []), new TsconfigPathsPlugin()],
+    },
+  }
 })

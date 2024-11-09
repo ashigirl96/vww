@@ -1,58 +1,49 @@
-import type { CompositionProps } from '@/types/constants.ts'
-import { fontFamily, loadFont } from '@remotion/google-fonts/Inter'
+import { Layer } from '@/remotion/MyComp/Layer.tsx'
+import type { Item } from '@/types/item.ts'
 import type React from 'react'
-import { useMemo } from 'react'
-import { AbsoluteFill, Sequence, spring, useCurrentFrame, useVideoConfig } from 'remotion'
-import type { z } from 'zod'
-import { NextLogo } from './NextLogo.tsx'
-import { Rings } from './Rings.tsx'
-import { TextFade } from './TextFade.tsx'
+import { useCallback } from 'react'
+import { AbsoluteFill, OffthreadVideo, staticFile } from 'remotion'
+import { SortedOutlines } from './SortedOutlines'
 
-loadFont()
-
-const container: React.CSSProperties = {
-  backgroundColor: 'white',
+export type MainProps = {
+  readonly items: Item[]
+  readonly setSelectedItem: React.Dispatch<React.SetStateAction<number | null>>
+  readonly selectedItem: number | null
+  readonly changeItem: (itemId: number, updater: (item: Item) => Item) => void
 }
 
-const logo: React.CSSProperties = {
-  justifyContent: 'center',
-  alignItems: 'center',
-}
+export const Main: React.FC<MainProps> = ({ items, setSelectedItem, selectedItem, changeItem }) => {
+  const onPointerDown = useCallback(
+    (e: React.PointerEvent) => {
+      if (e.button !== 0) {
+        return
+      }
 
-export const Main = ({ title }: z.infer<typeof CompositionProps>) => {
-  const frame = useCurrentFrame()
-  const { fps } = useVideoConfig()
-
-  const transitionStart = 2 * fps
-  const transitionDuration = 1 * fps
-
-  const logoOut = spring({
-    fps,
-    frame,
-    config: {
-      damping: 200,
+      setSelectedItem(null)
     },
-    durationInFrames: transitionDuration,
-    delay: transitionStart,
-  })
-
-  const titleStyle: React.CSSProperties = useMemo(() => {
-    return { fontFamily, fontSize: 70 }
-  }, [])
-
+    [setSelectedItem],
+  )
   return (
-    <AbsoluteFill style={container}>
-      <Sequence durationInFrames={transitionStart + transitionDuration}>
-        <Rings outProgress={logoOut} />
-        <AbsoluteFill style={logo}>
-          <NextLogo outProgress={logoOut} />
-        </AbsoluteFill>
-      </Sequence>
-      <Sequence from={transitionStart + transitionDuration / 2}>
-        <TextFade>
-          <h1 style={titleStyle}>{title}</h1>
-        </TextFade>
-      </Sequence>
+    <AbsoluteFill className={'bg-amber-100'} onPointerDown={onPointerDown}>
+      <OffthreadVideo
+        // id="my-video"
+        src={staticFile('videos/sample.mp4')}
+        style={{
+          position: 'absolute',
+          zIndex: 0, // 背面に配置
+        }}
+      />
+      <AbsoluteFill className={'overflow-hidden'}>
+        {items.map((item) => {
+          return <Layer key={item.id} item={item} />
+        })}
+      </AbsoluteFill>
+      <SortedOutlines
+        selectedItem={selectedItem}
+        items={items}
+        setSelectedItem={setSelectedItem}
+        changeItem={changeItem}
+      />
     </AbsoluteFill>
   )
 }

@@ -1,9 +1,9 @@
 import { z } from 'zod'
-import { CompositionProps } from './constants.ts'
+import { ItemProps } from './constants.ts'
 
 export const RenderRequest = z.object({
   id: z.string(),
-  inputProps: CompositionProps,
+  inputProps: ItemProps,
 })
 
 export const ProgressRequest = z.object({

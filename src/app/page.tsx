@@ -1,76 +1,130 @@
 'use client'
 
-import { RenderControls } from '@/components/RenderControls.tsx'
-import { Spacing } from '@/components/Spacing.tsx'
-import { Tips } from '@/components/Tips/Tips.tsx'
-import { Main } from '@/remotion/MyComp/Main.tsx'
-import {
-  type CompositionProps,
-  DURATION_IN_FRAMES,
-  VIDEO_FPS,
-  VIDEO_HEIGHT,
-  VIDEO_WIDTH,
-  defaultMyCompProps,
-} from '@/types/constants.ts'
-import { Player } from '@remotion/player'
-import type { NextPage } from 'next'
+import type { Item } from '@/types/item.ts'
+import { Player, type PlayerRef } from '@remotion/player'
 import type React from 'react'
-import { useMemo, useState } from 'react'
-import type { z } from 'zod'
+import { useCallback, useMemo, useRef, useState } from 'react'
+import '@/style.css'
+import { RenderControls } from '@/components/RenderControls.tsx'
+import { Main, type MainProps } from '@/remotion/MyComp/Main.tsx'
 
-const container: React.CSSProperties = {
-  maxWidth: 768,
-  margin: 'auto',
-  marginBottom: 20,
-}
+const DragAndDropDemo: React.FC = () => {
+  const [items, setItems] = useState<Item[]>([
+    {
+      left: 395,
+      top: 270,
+      width: 540,
+      durationInFrames: 300,
+      from: 0,
+      height: 540,
+      id: 0,
+      color: '#ccc',
+      isDragging: false,
+    },
+    {
+      left: 985,
+      top: 270,
+      width: 540,
+      durationInFrames: 300,
+      from: 0,
+      height: 540,
+      id: 1,
+      color: '#ccc',
+      isDragging: false,
+    },
+  ])
+  const [selectedItem, setSelectedItem] = useState<number | null>(null)
 
-const outer: React.CSSProperties = {
-  borderRadius: 'var(--geist-border-radius)',
-  overflow: 'hidden',
-  boxShadow: '0 0 200px rgba(0, 0, 0, 0.15)',
-  marginBottom: 40,
-  marginTop: 60,
-}
+  const changeItem = useCallback((itemId: number, updater: (item: Item) => Item) => {
+    setItems((oldItems) => {
+      return oldItems.map((item) => {
+        if (item.id === itemId) {
+          return updater(item)
+        }
 
-const player: React.CSSProperties = {
-  width: '100%',
-}
+        return item
+      })
+    })
+  }, [])
 
-const Home: NextPage = () => {
-  const [text, setText] = useState<string>(defaultMyCompProps.title)
+  const addItems = useCallback(() => {
+    setItems((oldItems) => {
+      const lastItem = oldItems[oldItems.length - 1]
+      return [
+        ...oldItems,
+        {
+          ...lastItem,
+          id: lastItem.id + 1,
+          left: lastItem.left + 10,
+          top: lastItem.top + 10,
+          color: 'red',
+        },
+      ]
+    })
+  }, [])
 
-  const inputProps: z.infer<typeof CompositionProps> = useMemo(() => {
+  const inputProps: MainProps = useMemo(() => {
     return {
-      title: text,
+      items,
+      setSelectedItem,
+      changeItem,
+      selectedItem,
     }
-  }, [text])
+  }, [changeItem, items, selectedItem])
+
+  const playerRef = useRef<PlayerRef>(null)
+
+  const _handlePlay = () => {
+    if (playerRef.current) {
+      playerRef.current.play()
+    }
+  }
+
+  const _handlePause = () => {
+    if (playerRef.current) {
+      playerRef.current.pause()
+    }
+  }
 
   return (
-    <div>
-      <div style={container}>
-        <div style={outer}>
-          <Player
-            component={Main}
-            inputProps={inputProps}
-            durationInFrames={DURATION_IN_FRAMES}
-            fps={VIDEO_FPS}
-            compositionHeight={VIDEO_HEIGHT}
-            compositionWidth={VIDEO_WIDTH}
-            style={player}
-            controls={true}
-            autoPlay={true}
-            loop={true}
-          />
-        </div>
-        <RenderControls text={text} setText={setText} inputProps={inputProps} />
-        <Spacing />
-        <Spacing />
-        <Spacing />
-        <Spacing />
-        <Tips />
+    <>
+      <Player
+        ref={playerRef}
+        style={{
+          // width: '50vw',
+          width: '100%',
+        }}
+        component={Main}
+        clickToPlay={true}
+        compositionHeight={1080}
+        compositionWidth={1920}
+        durationInFrames={300}
+        fps={30}
+        inputProps={inputProps}
+        overflowVisible
+      />
+      <div>
+        <button type={'button'} onClick={_handlePlay}>
+          再生
+        </button>
+        <button type={'button'} onClick={_handlePause}>
+          停止
+        </button>
+        <button type={'button'} onClick={addItems}>
+          追加
+        </button>
+        <RenderControls />
+        {/*<button*/}
+        {/*  type={'button'}*/}
+        {/*  onClick={async () => {*/}
+        {/*    await renderVideo({ id: 'Main', inputProps })*/}
+        {/*  }}*/}
+        {/*>*/}
+        {/*  レンダリング*/}
+        {/*</button>*/}
       </div>
-    </div>
+    </>
   )
 }
 
-export default Home
+export default DragAndDropDemo

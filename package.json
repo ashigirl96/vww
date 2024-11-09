@@ -9,27 +9,47 @@
     "check": "biome check . --write",
     "remotion": "remotionb studio",
     "render": "remotionb render",
-    "deploy": "node deploy.mjs"
+    "render:main": "remotionb render src/remotion/index.ts MyComp out/helloworld.mp4",
+    "deploy": "node deploy.mjs",
+    "tauri": "tauri",
+    "storybook": "storybook dev -p 6006",
+    "build-storybook": "storybook build"
   },
   "dependencies": {
     "@remotion/bundler": "4.0.221",
     "@remotion/cli": "4.0.221",
+    "@remotion/cloudrun": "4.0.221",
     "@remotion/google-fonts": "4.0.221",
     "@remotion/lambda": "4.0.221",
     "@remotion/paths": "4.0.221",
     "@remotion/player": "4.0.221",
+    "@remotion/renderer": "latest",
     "@remotion/shapes": "4.0.221",
-    "next": "14.2.13",
+    "@tauri-apps/api": "2.0.3",
+    "@tauri-apps/plugin-shell": "2.0.1",
+    "next": "14.2.15",
     "react": "18.3.1",
     "react-dom": "18.3.1",
+    "react-moveable": "0.56.0",
+    "react-selecto": "1.26.3",
     "remotion": "4.0.221",
     "zod": "3.22.3"
   },
   "devDependencies": {
     "@biomejs/biome": "^1.9.3",
+    "@chromatic-com/storybook": "^3.2.2",
     "@remotion/eslint-config": "4.0.221",
     "@remotion/eslint-plugin": "4.0.221",
     "@remotion/tailwind": "4.0.221",
+    "@storybook/addon-essentials": "^8.4.2",
+    "@storybook/addon-interactions": "^8.4.2",
+    "@storybook/addon-onboarding": "^8.4.2",
+    "@storybook/addon-styling-webpack": "^1.0.1",
+    "@storybook/blocks": "^8.4.2",
+    "@storybook/nextjs": "^8.4.2",
+    "@storybook/react": "^8.4.2",
+    "@storybook/test": "^8.4.2",
+    "@tauri-apps/cli": "2.0.4",
     "@types/node": "20.14.11",
     "@types/react": "18.3.1",
     "@types/react-dom": "18.3.0",
@@ -37,9 +57,21 @@
     "dotenv": "16.0.3",
     "eslint": "8.56.0",
     "eslint-config-next": "14.2.13",
+    "eslint-plugin-storybook": "^0.11.0",
     "prettier": "3.3.3",
+    "storybook": "^8.4.2",
+    "tsconfig-paths-webpack-plugin": "^4.1.0",
     "typescript": "5.6.2"
   },
-  "sideEffects": ["*.css"],
-  "workspaces": ["scripts/*"]
+  "sideEffects": [
+    "*.css"
+  ],
+  "workspaces": [
+    "scripts/*"
+  ],
+  "eslintConfig": {
+    "extends": [
+      "plugin:storybook/recommended"
+    ]
+  }
 }

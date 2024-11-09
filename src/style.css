@@ -34,4 +34,11 @@
             --subtitle: #8d8d8d;
         }
     }
+
+    html,
+    body,
+    #root {
+        @apply relative m-0 p-0 h-full text-[#333333] bg-[#fdfdfd];
+    }
 }
+

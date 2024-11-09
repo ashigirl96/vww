@@ -4,8 +4,14 @@
     "enabled": true
   },
   "files": {
-    "include": ["./*.js", "./*.mjs", "./*.ts", "./*.tsx", "./*.json"],
-    "ignore": ["**/.next/**", "node_modules", "./app/docs/.next/**", ".next/**"]
+    "include": ["./*.js", "./*.mjs", "./*.ts", "./*.tsx", "./*.json", ".storybook/**/*"],
+    "ignore": [
+      "**/.next/**",
+      "node_modules",
+      "./app/docs/.next/**",
+      ".next/**",
+      "**/node_modules/**"
+    ]
   },
   "formatter": {
     "enabled": true,
